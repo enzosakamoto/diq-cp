@@ -6,7 +6,14 @@ export default {
     './src/components/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {}
+    fontFamily: {
+      montserrat: ['Montserrat', 'sans-serif']
+    },
+    extend: {
+      backgroundImage: {
+        'cp-building': 'url("/src/assets/cp.png")'
+      }
+    }
   },
   plugins: []
 }
