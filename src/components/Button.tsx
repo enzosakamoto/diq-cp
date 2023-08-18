@@ -3,7 +3,7 @@ import { ComponentProps } from 'react'
 import { tv, VariantProps } from 'tailwind-variants'
 
 const button = tv({
-  base: 'font-medium w-24 py-2 px-4 rounded transition-all duration-500 text-white drop-shadow-md disabled:opacity-50 disabled:bg-gray-600 disabled:cursor-not-allowed',
+  base: 'font-montserrat text-lg w-24 py-2 px-4 rounded-xl transition-all duration-500 text-white drop-shadow-md disabled:opacity-50 disabled:bg-gray-600 disabled:cursor-not-allowed',
   variants: {
     color: {
       default: 'bg-blue-600 hover:bg-blue-700',
@@ -18,18 +18,9 @@ const button = tv({
 
 export type ButtonProps = ComponentProps<'button'> & VariantProps<typeof button>
 
-export default function Button({
-  disabled,
-  color,
-  className,
-  ...props
-}: ButtonProps) {
+export default function Button({ disabled, color, className, ...props }: ButtonProps) {
   return (
-    <button
-      disabled={disabled}
-      className={button({ color, className })}
-      {...props}
-    >
+    <button disabled={disabled} className={button({ color, className })} {...props}>
       {props.children}
     </button>
   )
