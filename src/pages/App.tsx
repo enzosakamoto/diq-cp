@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
 
-import Api from './api_usage/page'
 import Home from './home/page'
+import Login from './login/page'
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/api" element={<Api />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </>
