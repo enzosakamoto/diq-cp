@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/Button'
+
+import { setLogin, useLogin } from '../../redux/sliceLogin'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
@@ -12,20 +15,22 @@ const loginSchema = z.object({
   password: z.string().nonempty('Preenchao o campo da senha')
 })
 
-type User = z.infer<typeof loginSchema>
+export type User = z.infer<typeof loginSchema>
 
 export default function Login() {
+  const { token } = useSelector(useLogin)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogin = (data: User) => {
     axios
       .post('http://localhost:3001/login', data)
       .then((res) => {
+        // navigate('/')
         console.log(res.data)
-        navigate('/')
+        dispatch(setLogin(res.data))
       })
-      .catch((err) => console.log(err.response.data))
+      .catch((err) => console.log(err))
   }
-
   const {
     register,
     handleSubmit,
@@ -50,6 +55,7 @@ export default function Login() {
           <span className="text-white">{errors.password && errors.password.message}</span>
         </div>
         <Button type="submit">enviar</Button>
+        <span className="text-9xl">{token}</span>
       </form>
     </main>
   )
