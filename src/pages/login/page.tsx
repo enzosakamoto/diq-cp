@@ -25,11 +25,15 @@ export default function Login() {
     axios
       .post('http://localhost:3001/login', data)
       .then((res) => {
-        // navigate('/')
-        console.log(res.data)
-        dispatch(setLogin(res.data))
+        const { message, token } = res.data
+        console.log(message)
+        dispatch(setLogin({ token }))
+        navigate('/')
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        dispatch(setLogin({ token: '' }))
+      })
   }
   const {
     register,
@@ -55,7 +59,7 @@ export default function Login() {
           <span className="text-white">{errors.password && errors.password.message}</span>
         </div>
         <Button type="submit">enviar</Button>
-        <span className="text-9xl">{token}</span>
+        <span className="text-3xl">{token}</span>
       </form>
     </main>
   )
