@@ -35,9 +35,7 @@ describe('<Button>', () => {
   })
 
   it('should render a button with a custom className', () => {
-    const { getByText } = render(
-      <Button className="bg-yellow-600">Click me</Button>
-    )
+    const { getByText } = render(<Button className="bg-yellow-600">Click me</Button>)
 
     expect(getByText('Click me')).toBeInTheDocument()
     expect(getByText('Click me')).toHaveClass(

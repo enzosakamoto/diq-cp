@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/Button'
+
+import { setLogin, useLogin } from '../../redux/sliceLogin'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
@@ -12,20 +15,33 @@ const loginSchema = z.object({
   password: z.string().nonempty('Preenchao o campo da senha')
 })
 
-type User = z.infer<typeof loginSchema>
+export type User = z.infer<typeof loginSchema>
 
 export default function Login() {
+  // Redux Action
+  const { token } = useSelector(useLogin)
+  const dispatch = useDispatch()
+
+  // Navigate
   const navigate = useNavigate()
+
+  // Submit
   const handleLogin = (data: User) => {
     axios
       .post('http://localhost:3001/login', data)
       .then((res) => {
-        console.log(res.data)
+        const { message, token } = res.data
+        console.log(message)
+        dispatch(setLogin({ token }))
         navigate('/')
       })
-      .catch((err) => console.log(err.response.data))
+      .catch((err) => {
+        console.log(err)
+        dispatch(setLogin({ token: '' }))
+      })
   }
 
+  // Hook Form
   const {
     register,
     handleSubmit,
@@ -33,6 +49,7 @@ export default function Login() {
   } = useForm<User>({
     resolver: zodResolver(loginSchema)
   })
+
   return (
     <main className="flex h-screen w-full items-center justify-center bg-violet-950 font-montserrat">
       <form
@@ -50,6 +67,7 @@ export default function Login() {
           <span className="text-white">{errors.password && errors.password.message}</span>
         </div>
         <Button type="submit">enviar</Button>
+        <span className="text-3xl">{token}</span>
       </form>
     </main>
   )
