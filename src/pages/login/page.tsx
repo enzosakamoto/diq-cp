@@ -18,9 +18,14 @@ const loginSchema = z.object({
 export type User = z.infer<typeof loginSchema>
 
 export default function Login() {
+  // Redux Action
   const { token } = useSelector(useLogin)
   const dispatch = useDispatch()
+
+  // Navigate
   const navigate = useNavigate()
+
+  // Submit
   const handleLogin = (data: User) => {
     axios
       .post('http://localhost:3001/login', data)
@@ -35,6 +40,8 @@ export default function Login() {
         dispatch(setLogin({ token: '' }))
       })
   }
+
+  // Hook Form
   const {
     register,
     handleSubmit,
@@ -42,6 +49,7 @@ export default function Login() {
   } = useForm<User>({
     resolver: zodResolver(loginSchema)
   })
+
   return (
     <main className="flex h-screen w-full items-center justify-center bg-violet-950 font-montserrat">
       <form
