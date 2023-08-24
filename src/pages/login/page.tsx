@@ -33,7 +33,7 @@ export default function Login() {
         const { message, token } = res.data
         console.log(message)
         dispatch(setLogin({ token }))
-        navigate('/')
+        navigate('/login/admin')
       })
       .catch((err) => {
         console.log(err)

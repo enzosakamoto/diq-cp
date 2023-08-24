@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
 
+import Admin from './admin/page'
 import Home from './home/page'
 import Login from './login/page'
 
@@ -13,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </Router>
