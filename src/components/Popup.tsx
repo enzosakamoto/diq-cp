@@ -5,7 +5,16 @@ import Button from './Button'
 
 import axios from 'axios'
 
-export default function Popup({ id }: { id: string }) {
+export default function Popup({
+  id,
+  disposeModal
+}: {
+  id: string
+  disposeModal: React.Dispatch<React.SetStateAction<boolean>>
+}) {
+  const handleSubmit = () => {
+    disposeModal(false)
+  }
   const [company, setCompany] = useState<Company>({} as Company)
   useEffect(() => {
     axios
@@ -24,7 +33,9 @@ export default function Popup({ id }: { id: string }) {
         <p className="text-2xl">{company.description}</p>
         <p className="text-2xl">{company.link}</p>
         <p className="text-2xl">{company.image}</p>
-        <Button color="primary">Salvar</Button>
+        <Button onClick={handleSubmit} color="primary">
+          Salvar
+        </Button>
       </div>
     </div>
   )

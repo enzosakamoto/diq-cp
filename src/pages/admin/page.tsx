@@ -56,7 +56,7 @@ export default function Admin() {
             <Card key={company.id} company={company} setState={setCompanyId} />
           ))}
         </div>
-        {isModalOpen && <Popup id={companyId} />}
+        {isModalOpen && <Popup id={companyId} disposeModal={setIsModalOpen} />}
       </main>
     </>
   )
