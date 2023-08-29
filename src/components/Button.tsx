@@ -9,18 +9,24 @@ const button = tv({
       default: 'bg-blue-600 hover:bg-blue-700',
       primary: 'bg-green-600 hover:bg-green-700',
       secondary: 'bg-red-600 hover:bg-red-700'
+    },
+    size: {
+      sm: 'text-sm w-18',
+      md: 'text-md w-24',
+      lg: 'text-lg w-32'
     }
   },
   defaultVariants: {
-    color: 'default'
+    color: 'default',
+    size: 'md'
   }
 })
 
 export type ButtonProps = ComponentProps<'button'> & VariantProps<typeof button>
 
-export default function Button({ disabled, color, className, ...props }: ButtonProps) {
+export default function Button({ disabled, color, size, className, ...props }: ButtonProps) {
   return (
-    <button disabled={disabled} className={button({ color, className })} {...props}>
+    <button disabled={disabled} className={button({ color, size, className })} {...props}>
       {props.children}
     </button>
   )
