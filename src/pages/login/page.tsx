@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -25,6 +26,18 @@ export default function Login() {
   // Navigate
   const navigate = useNavigate()
 
+  useEffect(() => {
+    axios
+      .post('http://localhost:3001/login/validate', { token })
+      .then((res) => {
+        console.log(res.data.message)
+        navigate('/admin')
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  })
+
   // Submit
   const handleLogin = (data: User) => {
     axios
@@ -33,7 +46,7 @@ export default function Login() {
         const { message, token } = res.data
         console.log(message)
         dispatch(setLogin({ token }))
-        navigate('/login/admin')
+        navigate('/admin')
       })
       .catch((err) => {
         console.log(err)
