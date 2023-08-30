@@ -3,13 +3,16 @@ import Button from './Button'
 
 export default function Card({
   company,
-  setState
+  setState,
+  openModal
 }: {
   company: Company
-  setState: React.Dispatch<React.SetStateAction<string>>
+  setState: React.Dispatch<React.SetStateAction<Company>>
+  openModal: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const handleClick = () => {
-    setState(company.id)
+    setState(company)
+    openModal(true)
   }
 
   return (
