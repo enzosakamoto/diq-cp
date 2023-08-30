@@ -70,14 +70,14 @@ export default function Popup({
   })
 
   return (
-    <div className="absolute z-20 flex h-full w-full items-center justify-center bg-black bg-opacity-60">
+    <div className="fixed left-0 top-0 z-20 flex min-h-screen w-full items-center justify-center bg-black bg-opacity-80 font-montserrat">
       <form
         onSubmit={handleSubmit(handleUpdate)}
-        className="flex h-4/5 w-1/2 flex-col justify-center gap-8 rounded-lg bg-white p-8 text-black drop-shadow-md"
+        className="flex h-4/5 w-4/5 flex-col justify-center gap-8 rounded-lg bg-white p-8 text-black drop-shadow-md lg:w-1/2"
       >
         <div className="flex flex-col gap-4">
           <div className="flex flex-col justify-center gap-2">
-            <label className="text-2xl">Nome:</label>
+            <label className="text-2xl font-medium">Nome:</label>
             <input
               className="rounded-lg bg-gray-300 p-2 text-xl"
               type="text"
@@ -86,7 +86,7 @@ export default function Popup({
             <span className="text-red-800">{errors.name && errors.name.message}</span>
           </div>
           <div className="flex flex-col justify-center gap-2">
-            <label className="text-2xl">Imagem:</label>
+            <label className="text-2xl font-medium">Imagem:</label>
             <input
               className="rounded-lg bg-gray-300 p-2 text-xl"
               type="text"
@@ -95,15 +95,15 @@ export default function Popup({
             <span className="text-red-800">{errors.image && errors.image.message}</span>
           </div>
           <div className="flex flex-col justify-center gap-2">
-            <label className="text-2xl">Descrição:</label>
+            <label className="text-2xl font-medium">Descrição:</label>
             <textarea
-              className="h-32 resize-none rounded-lg bg-gray-300 p-2 text-xl"
+              className="h-36 resize-none rounded-lg bg-gray-300 p-2 text-xl"
               {...register('description')}
             />
             <span className="text-red-800">{errors.description && errors.description.message}</span>
           </div>
           <div className="flex flex-col justify-center gap-2">
-            <label className="text-2xl">Website:</label>
+            <label className="text-2xl font-medium">Website:</label>
             <input
               className="rounded-lg bg-gray-300 p-2 text-xl"
               type="text"
