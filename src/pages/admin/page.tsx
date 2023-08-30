@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,6 +10,7 @@ import Popup from '../../components/Popup'
 import { Company } from '../../interfaces/company'
 import { useLogin } from '../../redux/sliceLogin'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 
 export default function Admin() {
