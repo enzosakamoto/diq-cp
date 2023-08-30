@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
+import { AiOutlinePlus } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import AdminNavbar from '../../components/AdminNavbar'
+import Button from '../../components/Button'
 import Card from '../../components/Card'
 import Popup from '../../components/Popup'
 
@@ -50,12 +52,17 @@ export default function Admin() {
     <>
       <AdminNavbar />
       <main className="flex flex-col items-center justify-center gap-12 p-8">
-        <input
-          type="text"
-          className="mt-24 w-1/2 rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm"
-          placeholder="🔎 Pesquisar"
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="mt-24 flex w-full flex-row justify-center gap-4">
+          <input
+            type="text"
+            className="w-1/2 rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm"
+            placeholder="🔎 Pesquisar"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <Button className="flex items-center justify-center text-xl">
+            <AiOutlinePlus />
+          </Button>
+        </div>
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
           {search !== ''
             ? companies.map(
