@@ -12,7 +12,7 @@ const button = tv({
     },
     size: {
       sm: 'text-sm w-18',
-      md: 'text-md w-24',
+      md: 'text-md w-28',
       lg: 'text-lg w-32'
     }
   },
