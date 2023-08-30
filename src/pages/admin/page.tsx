@@ -27,7 +27,7 @@ export default function Admin() {
     axios
       .post('http://localhost:3001/login/validate', { token })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data.message)
       })
       .catch((err) => {
         console.log(err.response.data.message)

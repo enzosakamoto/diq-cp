@@ -6,7 +6,7 @@ const button = tv({
   base: 'font-montserrat text-lg w-24 py-2 px-4 rounded-xl transition-all duration-500 text-white drop-shadow-md disabled:opacity-50 disabled:bg-gray-600 disabled:cursor-not-allowed',
   variants: {
     color: {
-      default: 'bg-blue-600 hover:bg-blue-700',
+      default: 'bg-sky-600 hover:bg-sky-700',
       primary: 'bg-green-600 hover:bg-green-700',
       secondary: 'bg-red-600 hover:bg-red-700'
     },
