@@ -96,13 +96,13 @@ export default function Popup({
   }
 
   // Submit
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const validation = handleValidation()
     if (validation) {
       const { id, ...rest } = company
       const companyWithoutId: Omit<Company, 'id'> = rest
-      axios
+      await axios
         .patch(`http://localhost:3001/companies/${id}`, companyWithoutId, header)
         .then((res) => {
           console.log(res.data)
