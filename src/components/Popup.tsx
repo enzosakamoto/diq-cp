@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
+// import { ToastContainer, toast } from 'react-toastify'
 
 import { Company } from '../interfaces/company'
 import { useLogin } from '../redux/sliceLogin'
@@ -8,6 +9,8 @@ import Button from './Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { z } from 'zod'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const companySchema = z.object({
   name: z
@@ -43,6 +46,18 @@ export default function Popup({
       .patch(`http://localhost:3001/companies/${company.id}`, data, header)
       .then((res) => {
         console.log(res.data)
+        alert('Empresa atualizada com sucesso! 🤩')
+        // toast.success('Empresa atualizada com sucesso! 🤩', {
+        //   position: 'top-right',
+        //   autoClose: 1000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'colored'
+        // })
+        // setTimeout(() => {
+        // }, 1500)
         disposeModal(false)
       })
       .catch((err) => {
@@ -121,6 +136,7 @@ export default function Popup({
           </Button>
         </div>
       </form>
+      {/* <ToastContainer /> */}
     </div>
   )
 }
