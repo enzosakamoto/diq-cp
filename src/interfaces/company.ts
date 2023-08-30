@@ -5,3 +5,14 @@ export interface Company {
   description: string
   link: string
 }
+
+interface Error {
+  message: string
+}
+
+export interface UpdateError {
+  name: Error
+  image: Error
+  description: Error
+  link: Error
+}

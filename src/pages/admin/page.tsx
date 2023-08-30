@@ -36,17 +36,18 @@ export default function Admin() {
         console.log(err.response.data.message)
         navigate('/login')
       })
+  }, [navigate, token])
 
+  useEffect(() => {
     axios
       .get('http://localhost:3001/companies')
       .then((res) => {
-        console.log(res.data)
         setCompanies(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
-  }, [navigate, token])
+  }, [])
   return (
     <>
       <AdminNavbar />
