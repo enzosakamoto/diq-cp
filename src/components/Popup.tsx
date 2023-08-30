@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
-import { Company, UpdateError } from '../interfaces/company'
+import { Company } from '../interfaces/company'
 import { useLogin } from '../redux/sliceLogin'
 import Button from './Button'
 
