@@ -14,36 +14,31 @@ export default function Popup({
   id: string
   disposeModal: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+  // States
+  const [company, setCompany] = useState<Company>({} as Company)
+  const [errors, setErrors] = useState<UpdateError>({} as UpdateError)
+
+  // Get Company
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/companies/${id}`)
+      .then((res) => {
+        setCompany(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [id])
+
+  // Redux and token header
   const { token } = useSelector(useLogin)
   const header = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const validation = handleValidation()
-    if (validation) {
-      const { id, ...rest } = company
-      const companyWithoutId: Omit<Company, 'id'> = rest
-      axios
-        .patch(`http://localhost:3001/companies/${id}`, companyWithoutId, header)
-        .then((res) => {
-          console.log(res.data)
-          disposeModal(false)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    } else {
-      alert('Preencha todos os campos corretamente!')
-    }
-  }
 
-  const handleCancel = () => {
-    disposeModal(false)
-  }
-
+  // Validation
   const handleValidation = (): boolean => {
     setErrors({} as UpdateError)
     let error = false
@@ -100,18 +95,31 @@ export default function Popup({
     return false
   }
 
-  const [company, setCompany] = useState<Company>({} as Company)
-  const [errors, setErrors] = useState<UpdateError>({} as UpdateError)
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/companies/${id}`)
-      .then((res) => {
-        setCompany(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [id])
+  // Submit
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const validation = handleValidation()
+    if (validation) {
+      const { id, ...rest } = company
+      const companyWithoutId: Omit<Company, 'id'> = rest
+      axios
+        .patch(`http://localhost:3001/companies/${id}`, companyWithoutId, header)
+        .then((res) => {
+          console.log(res.data)
+          disposeModal(false)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      alert('Preencha todos os campos corretamente!')
+    }
+  }
+
+  // Cancel
+  const handleCancel = () => {
+    disposeModal(false)
+  }
 
   return (
     <div className="absolute z-20 flex h-full w-full items-center justify-center bg-black bg-opacity-60">
