@@ -1,7 +1,7 @@
 import sliceLogin from './sliceLogin'
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { persistReducer } from 'redux-persist'
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 export type RootState = ReturnType<typeof store.getState>
@@ -19,7 +19,13 @@ const reducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 const store = configureStore({
-  reducer: persistedReducer
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
+    })
 })
 
 export default store
