@@ -26,6 +26,7 @@ export default function Login() {
   // Navigate
   const navigate = useNavigate()
 
+  // Token validation
   useEffect(() => {
     axios
       .post('http://localhost:3001/login/validate', { token })
@@ -50,6 +51,7 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err)
+        alert(err.response.data)
         dispatch(setLogin({ token: '' }))
       })
   }
@@ -60,14 +62,15 @@ export default function Login() {
     handleSubmit,
     formState: { errors }
   } = useForm<User>({
-    resolver: zodResolver(loginSchema)
+    resolver: zodResolver(loginSchema),
+    mode: 'onBlur'
   })
 
   return (
     <main className="flex h-screen w-full items-center justify-center bg-violet-950 font-montserrat">
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="flex flex-col items-center justify-center gap-8"
+        className="flex flex-col items-center justify-center gap-8 rounded-lg bg-blue-900 p-10 drop-shadow-lg"
       >
         <div className="flex flex-col justify-center gap-2">
           <label className="text-3xl text-white">Login</label>
@@ -80,7 +83,6 @@ export default function Login() {
           <span className="text-white">{errors.password && errors.password.message}</span>
         </div>
         <Button type="submit">enviar</Button>
-        <span className="text-3xl">{token}</span>
       </form>
     </main>
   )
