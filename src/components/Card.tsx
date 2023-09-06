@@ -1,5 +1,10 @@
+import { useSelector } from 'react-redux'
+
 import { Company } from '../interfaces/company'
+import { useLogin } from '../redux/sliceLogin'
 import Button from './Button'
+
+import axios from 'axios'
 
 export default function Card({
   company,
@@ -10,9 +15,34 @@ export default function Card({
   setState: React.Dispatch<React.SetStateAction<Company>>
   openModal: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const handleClick = () => {
+  // Redux and token header
+  const { token } = useSelector(useLogin)
+  const header = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  // Update
+  const handleUpdateClick = () => {
     setState(company)
     openModal(true)
+  }
+
+  // Delete
+  const handleDeleteClick = () => {
+    const confirm = window.confirm(`Tem certeza que deseja excluir a empresa ${company.name}?`)
+    if (confirm) {
+      axios
+        .delete(`http://localhost:3001/companies/${company.id}`, header)
+        .then((res) => {
+          console.log(res.data)
+          alert('Empresa excluída com sucesso! 🤩')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 
   return (
@@ -34,10 +64,10 @@ export default function Card({
             <p className="text-md overflow-hidden text-ellipsis">{company.link}</p>
           </div>
           <div className="flex flex-row items-center justify-center gap-8">
-            <Button onClick={handleClick} size="md">
+            <Button onClick={handleUpdateClick} size="md">
               Editar
             </Button>
-            <Button size="md" color="secondary">
+            <Button onClick={handleDeleteClick} size="md" color="secondary">
               Excluir
             </Button>
           </div>
