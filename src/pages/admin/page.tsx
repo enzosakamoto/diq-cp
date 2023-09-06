@@ -16,7 +16,8 @@ import axios from 'axios'
 export default function Admin() {
   // States
   const [companies, setCompanies] = useState<Company[]>([])
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false)
   const [company, setCompany] = useState<Company>({} as Company)
   const [search, setSearch] = useState<string>('')
 
@@ -59,7 +60,10 @@ export default function Admin() {
             placeholder="🔎 Pesquisar"
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Button className="flex items-center justify-center text-xl">
+          <Button
+            onClick={() => setIsCreateModalOpen(true)}
+            className="flex items-center justify-center text-xl"
+          >
             <AiOutlinePlus />
           </Button>
         </div>
@@ -71,7 +75,7 @@ export default function Admin() {
                     <Card
                       key={company.id}
                       company={company}
-                      openModal={setIsModalOpen}
+                      openModal={setIsUpdateModalOpen}
                       setState={setCompany}
                     />
                   )
@@ -80,12 +84,13 @@ export default function Admin() {
                 <Card
                   key={company.id}
                   company={company}
-                  openModal={setIsModalOpen}
+                  openModal={setIsUpdateModalOpen}
                   setState={setCompany}
                 />
               ))}
         </div>
-        {isModalOpen && <Popup company={company} disposeModal={setIsModalOpen} />}
+        {isUpdateModalOpen && <Popup company={company} disposeModal={setIsUpdateModalOpen} />}
+        {isCreateModalOpen && <Popup disposeModal={setIsCreateModalOpen} />}
       </main>
     </>
   )
