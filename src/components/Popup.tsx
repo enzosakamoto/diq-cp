@@ -29,7 +29,7 @@ export default function Popup({
   company,
   disposeModal
 }: {
-  company: Company
+  company?: Company
   disposeModal: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   // Redux and token header
@@ -40,29 +40,47 @@ export default function Popup({
     }
   }
 
-  // Submit
-  const handleUpdate = async (data: Omit<Company, 'id'>) => {
+  // Submit - Create
+  const handleCreate = async (data: Omit<Company, 'id'>) => {
     await axios
-      .patch(`http://localhost:3001/companies/${company.id}`, data, header)
+      .post('http://localhost:3001/companies', data, header)
       .then((res) => {
         console.log(res.data)
-        alert('Empresa atualizada com sucesso! 🤩')
-        // toast.success('Empresa atualizada com sucesso! 🤩', {
-        //   position: 'top-right',
-        //   autoClose: 1000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: 'colored'
-        // })
-        // setTimeout(() => {
-        // }, 1500)
+        alert('Empresa criada com sucesso!')
         disposeModal(false)
       })
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  // Submit - Update
+  const handleUpdate = async (data: Omit<Company, 'id'>) => {
+    if (company) {
+      await axios
+        .patch(`http://localhost:3001/companies/${company.id}`, data, header)
+        .then((res) => {
+          console.log(res.data)
+          alert('Empresa atualizada com sucesso! 🤩')
+          // toast.success('Empresa atualizada com sucesso! 🤩', {
+          //   position: 'top-right',
+          //   autoClose: 1000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: 'colored'
+          // })
+          // setTimeout(() => {
+          // }, 1500)
+          disposeModal(false)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      alert('Erro ao atualizar empresa! 😥')
+    }
   }
 
   // Cancel
@@ -77,17 +95,17 @@ export default function Popup({
   } = useForm<Omit<Company, 'id'>>({
     resolver: zodResolver(companySchema),
     defaultValues: {
-      name: company.name,
-      image: company.image,
-      description: company.description,
-      link: company.link
+      name: company ? company.name : '',
+      image: company ? company.image : '',
+      description: company ? company.description : '',
+      link: company ? company.link : ''
     }
   })
 
   return (
     <div className="fixed left-0 top-0 z-20 flex min-h-screen w-full items-center justify-center bg-black bg-opacity-80 font-montserrat">
       <form
-        onSubmit={handleSubmit(handleUpdate)}
+        onSubmit={company ? handleSubmit(handleUpdate) : handleSubmit(handleCreate)}
         className="flex h-4/5 w-4/5 flex-col justify-center gap-8 rounded-lg bg-white p-8 text-black drop-shadow-md lg:w-1/2"
       >
         <div className="flex flex-col gap-4">
