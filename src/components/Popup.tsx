@@ -99,7 +99,8 @@ export default function Popup({
       image: company ? company.image : '',
       description: company ? company.description : '',
       link: company ? company.link : ''
-    }
+    },
+    mode: 'onBlur'
   })
 
   return (
