@@ -1,10 +1,26 @@
 import { AiOutlineLogin } from 'react-icons/ai'
+import { BiExit } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 
 import logo from '../assets/logoimt.png'
 
 export default function Navbar() {
+  const navigate = useNavigate()
+
+  const handleExit = () => {
+    localStorage.removeItem('persist:root')
+    navigate('/')
+  }
+
+  // URL for admin control
+  const url = window.location.href
+
   return (
-    <nav className="fixed flex w-full flex-row items-center justify-between gap-8 bg-transparent px-8 py-4 font-montserrat drop-shadow-md">
+    <nav
+      className={`fixed flex w-full flex-row items-center justify-between gap-8 px-8 py-4 font-montserrat drop-shadow-md ${
+        url.includes('admin') ? 'bg-sky-800' : 'bg-transparent'
+      }`}
+    >
       <a className="transform transition-all duration-200 hover:scale-105" href="/">
         <img src={logo} alt="Logo IMT" />
       </a>
@@ -15,9 +31,15 @@ export default function Navbar() {
         <a className="transform transition-all duration-200 hover:scale-105" href="/companies">
           Empresas
         </a>
-        <a className="transform transition-all duration-200 hover:scale-105" href="/login">
-          <AiOutlineLogin className="text-3xl" />
-        </a>
+        {url.includes('admin') ? (
+          <a className="transform transition-all duration-200 hover:scale-105" onClick={handleExit}>
+            <BiExit className="text-3xl" />
+          </a>
+        ) : (
+          <a className="transform transition-all duration-200 hover:scale-105" href="/login">
+            <AiOutlineLogin className="text-3xl" />
+          </a>
+        )}
       </div>
     </nav>
   )
