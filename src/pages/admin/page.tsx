@@ -3,7 +3,6 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import AdminNavbar from '../../components/AdminNavbar'
 import Button from '../../components/Button'
 import Card from '../../components/Card'
 import Popup from '../../components/Popup'
@@ -24,6 +23,7 @@ export default function Admin() {
   // Redux and token header
   const { token } = useSelector(useLogin)
   const navigate = useNavigate()
+  // const url = window.location.href
 
   // Validate token
   useEffect(() => {
@@ -51,7 +51,6 @@ export default function Admin() {
   }, [])
   return (
     <>
-      <AdminNavbar />
       <main className="flex flex-col items-center justify-center gap-12 p-8">
         <div className="mt-24 flex w-full flex-row justify-center gap-4">
           <input
