@@ -32,11 +32,19 @@ export default function Navbar() {
           Empresas
         </a>
         {url.includes('admin') ? (
-          <a className="transform transition-all duration-200 hover:scale-105" onClick={handleExit}>
+          <a
+            data-testid="admin"
+            className="transform transition-all duration-200 hover:scale-105"
+            onClick={handleExit}
+          >
             <BiExit className="text-3xl" />
           </a>
         ) : (
-          <a className="transform transition-all duration-200 hover:scale-105" href="/login">
+          <a
+            data-testid="user"
+            className="transform transition-all duration-200 hover:scale-105"
+            href="/login"
+          >
             <AiOutlineLogin className="text-3xl" />
           </a>
         )}
