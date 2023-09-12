@@ -21,8 +21,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      # - name: Run tests
-      #   run: yarn test --coverage --watchAll=false
+      - name: Run tests
+        run: yarn coverage
 
       - name: Lint with ESLint and Prettier
         run: yarn lint
