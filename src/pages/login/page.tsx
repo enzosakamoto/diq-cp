@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/Button'
 
+import api from '../../api/server'
 import { setLogin, useLogin } from '../../redux/sliceLogin'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import axios from 'axios'
 import { z } from 'zod'
 
 const loginSchema = z.object({
@@ -28,8 +28,8 @@ export default function Login() {
 
   // Token validation
   useEffect(() => {
-    axios
-      .post('http://localhost:3001/login/validate', { token })
+    api
+      .post('/login/validate', { token })
       .then((res) => {
         console.log(res.data.message)
         navigate('/admin')
@@ -41,8 +41,8 @@ export default function Login() {
 
   // Submit
   const handleLogin = (data: User) => {
-    axios
-      .post('http://localhost:3001/login', data)
+    api
+      .post('/login', data)
       .then((res) => {
         const { message, token } = res.data
         console.log(message)

@@ -1,10 +1,9 @@
 import { useSelector } from 'react-redux'
 
+import api from '../api/server'
 import { Company } from '../interfaces/company'
 import { useLogin } from '../redux/sliceLogin'
 import Button from './Button'
-
-import axios from 'axios'
 
 export default function Card({
   company,
@@ -30,11 +29,11 @@ export default function Card({
   }
 
   // Delete
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     const confirm = window.confirm(`Tem certeza que deseja excluir a empresa ${company.name}?`)
     if (confirm) {
-      axios
-        .delete(`http://localhost:3001/companies/${company.id}`, header)
+      await api
+        .delete(`/companies/${company.id}`, header)
         .then((res) => {
           console.log(res.data)
           alert('Empresa excluída com sucesso! 🤩')

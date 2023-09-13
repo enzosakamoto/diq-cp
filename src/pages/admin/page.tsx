@@ -7,10 +7,9 @@ import Button from '../../components/Button'
 import Card from '../../components/Card'
 import Popup from '../../components/Popup'
 
+import api from '../../api/server'
 import { Company } from '../../interfaces/company'
 import { useLogin } from '../../redux/sliceLogin'
-
-import axios from 'axios'
 
 export default function Admin() {
   // States
@@ -27,8 +26,8 @@ export default function Admin() {
 
   // Validate token
   useEffect(() => {
-    axios
-      .post('http://localhost:3001/login/validate', { token })
+    api
+      .post('/login/validate', { token })
       .then((res) => {
         console.log(res.data.message)
       })
@@ -40,8 +39,8 @@ export default function Admin() {
 
   // Get companies
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/companies')
+    api
+      .get('/companies')
       .then((res) => {
         setCompanies(res.data)
       })
