@@ -51,10 +51,10 @@ export default function Admin() {
   return (
     <>
       <main className="flex flex-col items-center justify-center gap-12 p-8">
-        <div className="mt-24 flex w-full flex-row justify-center gap-4">
+        <div className="mt-24 flex w-full flex-row items-center justify-center gap-4">
           <input
             type="text"
-            className="w-1/2 rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm placeholder:font-montserrat"
+            className="w-full rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm placeholder:font-montserrat sm:w-1/2"
             placeholder="🔎 Pesquisar"
             onChange={(e) => setSearch(e.target.value)}
           />
