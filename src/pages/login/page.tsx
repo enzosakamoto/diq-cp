@@ -13,7 +13,7 @@ import { z } from 'zod'
 
 const loginSchema = z.object({
   username: z.string().nonempty('Preencha o campo do usuário'),
-  password: z.string().nonempty('Preenchao o campo da senha')
+  password: z.string().nonempty('Preencha o campo da senha')
 })
 
 export type User = z.infer<typeof loginSchema>

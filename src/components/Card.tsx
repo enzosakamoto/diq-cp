@@ -49,7 +49,7 @@ export default function Card({
       <div className="flex h-1/2 w-full flex-col items-center gap-4 rounded-lg bg-cyan-400 bg-opacity-20 p-4 drop-shadow-md xl:h-72 xl:flex-row xl:items-center">
         <img
           src={company.image}
-          className="h-32 w-32 rounded-lg bg-white object-contain drop-shadow-md xl:h-56 xl:w-56"
+          className="h-32 w-32 rounded-lg bg-white object-contain p-4 drop-shadow-md xl:h-56 xl:w-56"
           alt={`Logo da ${company.name}`}
         />
         <div className="flex w-full flex-col justify-center gap-8 p-4 xl:w-2/3">

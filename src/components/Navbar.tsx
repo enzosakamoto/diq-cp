@@ -18,23 +18,23 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed z-10 flex w-full flex-row items-center justify-between gap-8 px-8 py-4 font-montserrat drop-shadow-md ${
-        url.includes('admin') ? 'bg-sky-800' : 'bg-transparent'
+        url.includes('admin') || url.includes('companies') ? 'bg-sky-800' : 'bg-transparent'
       }`}
     >
-      <a className="transform transition-all duration-200 hover:scale-105" href="/">
+      <a className="transform transition-all duration-500 hover:scale-105" href="/">
         <img src={logo} alt="Logo IMT" />
       </a>
       <div className="flex flex-row items-center justify-center gap-8 text-2xl text-white">
-        <a className="transform transition-all duration-200 hover:scale-105" href="/forms">
+        <a className="transform transition-all duration-500 hover:scale-105" href="/forms">
           Formulário
         </a>
-        <a className="transform transition-all duration-200 hover:scale-105" href="/companies">
+        <a className="transform transition-all duration-500 hover:scale-105" href="/companies">
           Empresas
         </a>
         {url.includes('admin') ? (
           <a
             data-testid="admin"
-            className="transform transition-all duration-200 hover:scale-105"
+            className="transform transition-all duration-500 hover:scale-105"
             onClick={handleExit}
           >
             <BiExit className="text-3xl" />
@@ -42,7 +42,7 @@ export default function Navbar() {
         ) : (
           <a
             data-testid="user"
-            className="transform transition-all duration-200 hover:scale-105"
+            className="transform transition-all duration-500 hover:scale-105"
             href="/login"
           >
             <AiOutlineLogin className="text-3xl" />
