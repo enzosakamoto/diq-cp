@@ -26,6 +26,8 @@ export default function Company() {
           <a
             className="flex h-72 w-72 transform justify-center rounded-lg bg-white transition-all duration-500 hover:scale-105"
             href={company.link}
+            target="_blank"
+            rel="noreferrer"
           >
             <img className="object-contain" src={company.image} alt={`Logo da ${company.name}`} />
           </a>
