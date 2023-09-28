@@ -1,7 +1,11 @@
 import axios from 'axios'
 
 const baseURL: string =
-  import.meta.env.VITE_STAGE === 'DEV' ? 'http://localhost:3001' : 'https://api.example.com'
+  import.meta.env.VITE_STAGE === 'TEST'
+    ? 'http://localhost:3001'
+    : import.meta.env.VITE_STAGE === 'DEV'
+    ? 'https://diq-mss-companies.vercel.app'
+    : 'http://localhost:3001'
 
 const api = axios.create({
   baseURL: baseURL
