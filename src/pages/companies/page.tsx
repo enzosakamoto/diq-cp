@@ -28,12 +28,12 @@ export default function Companies() {
           <div className="flex w-full items-center justify-center">
             <input
               type="text"
-              className="w-1/3 rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm placeholder:font-montserrat"
+              className="w-3/5 rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm placeholder:font-montserrat md:w-1/3"
               placeholder="🔎 Pesquisar"
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="mt-12 grid grid-cols-2 items-center gap-12 lg:grid-cols-5">
+          <div className="mt-12 grid grid-cols-1 items-center gap-12 px-12 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {search !== ''
               ? companies.map(
                   (company) =>

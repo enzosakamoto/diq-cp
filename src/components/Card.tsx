@@ -49,7 +49,7 @@ export default function Card({
       <div className="flex h-1/2 w-full flex-col items-center gap-4 rounded-lg bg-cyan-400 bg-opacity-20 p-4 drop-shadow-md xl:h-72 xl:flex-row xl:items-center">
         <img
           src={company.image}
-          className="h-32 w-32 rounded-lg bg-white object-contain p-4 drop-shadow-md xl:h-56 xl:w-56"
+          className="mt-4 h-32 w-32 rounded-lg bg-white object-contain p-4 drop-shadow-md xl:mt-0 xl:h-56 xl:w-56"
           alt={`Logo da ${company.name}`}
         />
         <div className="flex w-full flex-col justify-center gap-8 p-4 xl:w-2/3">
@@ -62,7 +62,7 @@ export default function Card({
             </p>
             <p className="text-md overflow-hidden text-ellipsis">{company.link}</p>
           </div>
-          <div className="flex flex-row items-center justify-center gap-8">
+          <div className="flex flex-col items-center justify-center gap-8 sm:flex-row">
             <Button onClick={handleUpdateClick} size="md">
               Editar
             </Button>

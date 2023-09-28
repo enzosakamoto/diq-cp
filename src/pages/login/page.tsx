@@ -70,19 +70,29 @@ export default function Login() {
     <main className="flex h-screen w-full items-center justify-center bg-violet-950 font-montserrat">
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="flex flex-col items-center justify-center gap-8 rounded-lg bg-blue-900 p-10 drop-shadow-lg"
+        className="flex flex-col items-center justify-center gap-8 rounded-lg bg-blue-900 p-8 px-8 drop-shadow-lg sm:w-auto sm:p-10"
       >
         <div className="flex flex-col justify-center gap-2">
-          <label className="text-3xl text-white">Login</label>
-          <input className="rounded-lg p-2 text-2xl" type="text" {...register('username')} />
+          <label className="text-xl text-white sm:text-3xl">Login</label>
+          <input
+            className="w-4/3 rounded-lg p-2 text-xl sm:w-auto sm:text-2xl"
+            type="text"
+            {...register('username')}
+          />
           <span className="text-white">{errors.username && errors.username.message}</span>
         </div>
         <div className="flex flex-col justify-center gap-2">
-          <label className="text-3xl text-white">Senha</label>
-          <input className="rounded-lg p-2 text-2xl" type="password" {...register('password')} />
+          <label className="text-xl text-white sm:text-3xl">Senha</label>
+          <input
+            className="w-4/3 rounded-lg p-2 text-xl sm:w-auto sm:text-2xl"
+            type="password"
+            {...register('password')}
+          />
           <span className="text-white">{errors.password && errors.password.message}</span>
         </div>
-        <Button type="submit">enviar</Button>
+        <Button size="md" type="submit">
+          Enviar
+        </Button>
       </form>
     </main>
   )

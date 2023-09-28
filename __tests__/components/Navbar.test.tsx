@@ -10,7 +10,7 @@ import '@testing-library/jest-dom'
 
 describe('<Navbar />', () => {
   test('it should render a navbar', () => {
-    const { getByText, getByRole } = render(
+    const { getAllByText, getByRole } = render(
       <Router>
         <Navbar />
       </Router>
@@ -20,10 +20,17 @@ describe('<Navbar />', () => {
     expect(getByRole('navigation')).toHaveClass(
       'fixed flex w-full flex-row items-center justify-between gap-8 bg-transparent px-8 py-4 font-montserrat drop-shadow-md'
     )
-    expect(getByText('Formulário')).toBeInTheDocument()
-    expect(getByText('Empresas')).toBeInTheDocument()
 
-    expect(getByText('Formulário')).toHaveAttribute('href', '/forms')
-    expect(getByText('Empresas')).toHaveAttribute('href', '/companies')
+    expect(getAllByText('Formulário')[0]).toBeInTheDocument()
+    expect(getAllByText('Empresas')[0]).toBeInTheDocument()
+
+    expect(getAllByText('Formulário')[0]).toHaveAttribute('href', '/forms')
+    expect(getAllByText('Empresas')[0]).toHaveAttribute('href', '/companies')
+
+    expect(getAllByText('Formulário')[1]).toBeInTheDocument()
+    expect(getAllByText('Empresas')[1]).toBeInTheDocument()
+
+    expect(getAllByText('Formulário')[1]).toHaveAttribute('href', '/forms')
+    expect(getAllByText('Empresas')[1]).toHaveAttribute('href', '/companies')
   })
 })
