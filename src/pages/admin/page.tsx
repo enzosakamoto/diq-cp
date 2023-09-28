@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlus, AiOutlineLoading } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,6 +18,7 @@ export default function Admin() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false)
   const [company, setCompany] = useState<Company>({} as Company)
   const [search, setSearch] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(true)
 
   // Redux and token header
   const { token } = useSelector(useLogin)
@@ -43,6 +44,7 @@ export default function Admin() {
       .get('/companies')
       .then((res) => {
         setCompanies(res.data)
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -66,26 +68,30 @@ export default function Admin() {
           </Button>
         </div>
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-          {search !== ''
-            ? companies.map(
-                (company) =>
-                  company.name.toLowerCase().includes(search.toLowerCase()) && (
-                    <Card
-                      key={company.id}
-                      company={company}
-                      openModal={setIsUpdateModalOpen}
-                      setState={setCompany}
-                    />
-                  )
-              )
-            : companies.map((company) => (
-                <Card
-                  key={company.id}
-                  company={company}
-                  openModal={setIsUpdateModalOpen}
-                  setState={setCompany}
-                />
-              ))}
+          {loading ? (
+            <AiOutlineLoading className="col-span-4 animate-spin text-8xl text-sky-600" />
+          ) : search !== '' ? (
+            companies.map(
+              (company) =>
+                company.name.toLowerCase().includes(search.toLowerCase()) && (
+                  <Card
+                    key={company.id}
+                    company={company}
+                    openModal={setIsUpdateModalOpen}
+                    setState={setCompany}
+                  />
+                )
+            )
+          ) : (
+            companies.map((company) => (
+              <Card
+                key={company.id}
+                company={company}
+                openModal={setIsUpdateModalOpen}
+                setState={setCompany}
+              />
+            ))
+          )}
         </div>
         {isUpdateModalOpen && <Popup company={company} disposeModal={setIsUpdateModalOpen} />}
         {isCreateModalOpen && <Popup disposeModal={setIsCreateModalOpen} />}
