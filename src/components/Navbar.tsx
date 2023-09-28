@@ -25,7 +25,9 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed z-10 flex w-full flex-row items-center justify-between gap-8 px-8 py-4 font-montserrat drop-shadow-md ${
-        url.includes('admin') || url.includes('companies') ? 'bg-sky-800' : 'bg-transparent'
+        url.includes('admin') || url.includes('companies') || url.includes('forms')
+          ? 'bg-sky-800'
+          : 'bg-transparent'
       }`}
     >
       <a className="transform transition-all duration-500 hover:scale-105" href="/">
