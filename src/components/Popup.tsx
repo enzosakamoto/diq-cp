@@ -2,12 +2,12 @@ import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 // import { ToastContainer, toast } from 'react-toastify'
 
+import api from '../api/server'
 import { Company } from '../interfaces/company'
 import { useLogin } from '../redux/sliceLogin'
 import Button from './Button'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import axios from 'axios'
 import { z } from 'zod'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -42,8 +42,8 @@ export default function Popup({
 
   // Submit - Create
   const handleCreate = async (data: Omit<Company, 'id'>) => {
-    await axios
-      .post('http://localhost:3001/companies', data, header)
+    await api
+      .post('/companies', data, header)
       .then((res) => {
         console.log(res.data)
         alert('Empresa criada com sucesso!')
@@ -57,8 +57,8 @@ export default function Popup({
   // Submit - Update
   const handleUpdate = async (data: Omit<Company, 'id'>) => {
     if (company) {
-      await axios
-        .patch(`http://localhost:3001/companies/${company.id}`, data, header)
+      await api
+        .patch(`/companies/${company.id}`, data, header)
         .then((res) => {
           console.log(res.data)
           alert('Empresa atualizada com sucesso! 🤩')

@@ -3,15 +3,13 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import AdminNavbar from '../../components/AdminNavbar'
 import Button from '../../components/Button'
 import Card from '../../components/Card'
 import Popup from '../../components/Popup'
 
+import api from '../../api/server'
 import { Company } from '../../interfaces/company'
 import { useLogin } from '../../redux/sliceLogin'
-
-import axios from 'axios'
 
 export default function Admin() {
   // States
@@ -24,11 +22,12 @@ export default function Admin() {
   // Redux and token header
   const { token } = useSelector(useLogin)
   const navigate = useNavigate()
+  // const url = window.location.href
 
   // Validate token
   useEffect(() => {
-    axios
-      .post('http://localhost:3001/login/validate', { token })
+    api
+      .post('/login/validate', { token })
       .then((res) => {
         console.log(res.data.message)
       })
@@ -40,8 +39,8 @@ export default function Admin() {
 
   // Get companies
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/companies')
+    api
+      .get('/companies')
       .then((res) => {
         setCompanies(res.data)
       })
@@ -51,12 +50,11 @@ export default function Admin() {
   }, [])
   return (
     <>
-      <AdminNavbar />
       <main className="flex flex-col items-center justify-center gap-12 p-8">
-        <div className="mt-24 flex w-full flex-row justify-center gap-4">
+        <div className="mt-24 flex w-full flex-row items-center justify-center gap-4">
           <input
             type="text"
-            className="w-1/2 rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm"
+            className="w-full rounded-lg bg-gray-300 px-4 py-2 outline-none drop-shadow-sm placeholder:font-montserrat sm:w-1/2"
             placeholder="🔎 Pesquisar"
             onChange={(e) => setSearch(e.target.value)}
           />
