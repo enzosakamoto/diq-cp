@@ -104,7 +104,7 @@ export default function Popup({
   })
 
   return (
-    <div className="fixed left-0 top-0 z-20 flex min-h-screen w-full items-center justify-center bg-black bg-opacity-80 font-montserrat">
+    <div className="fixed left-0 top-0 z-50 flex min-h-screen w-full items-center justify-center bg-black bg-opacity-80 font-montserrat">
       <form
         onSubmit={company ? handleSubmit(handleUpdate) : handleSubmit(handleCreate)}
         className="flex h-4/5 w-4/5 flex-col justify-center gap-8 rounded-lg bg-white p-8 text-black drop-shadow-md lg:w-1/2"
