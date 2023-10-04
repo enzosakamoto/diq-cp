@@ -7,7 +7,7 @@ export default function Square({ company }: { company: Company }) {
       className="relative flex flex-col justify-center overflow-hidden drop-shadow-xl"
     >
       <div className="absolute inset-0 bg-center drop-shadow-xl"></div>
-      <div className="group relative m-0 flex h-72 w-72 rounded-xl sm:mx-auto sm:max-w-lg">
+      <div className="group relative m-0 flex h-56 w-56 rounded-xl sm:mx-auto sm:h-72 sm:w-72 sm:max-w-lg">
         <div className="z-10 h-full w-full overflow-hidden rounded-xl bg-white opacity-80 transition duration-300 ease-in-out group-hover:opacity-100">
           <img
             src={company.image}
