@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed z-10 flex w-full flex-row items-center justify-between gap-8 px-8 py-4 font-montserrat drop-shadow-md ${
+      className={`fixed z-50 flex w-full flex-row items-center justify-between gap-8 px-8 py-4 font-montserrat drop-shadow-md ${
         url.includes('admin') || url.includes('companies') || url.includes('forms')
           ? 'bg-sky-800'
           : 'bg-transparent'
