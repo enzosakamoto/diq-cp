@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AiOutlineLoading } from 'react-icons/ai'
+import { ToastContainer, toast } from 'react-toastify'
 
 import Button from '../../components/Button'
 
+import emailjs from '@emailjs/browser'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -40,19 +42,62 @@ export default function Forms() {
   const [loading, setLoading] = useState<boolean>(false)
 
   const handleSendForm = (data: Forms) => {
-    console.table(data)
-    setLoading(!loading)
-    setTimeout(() => {
-      setLoading(!loading)
-      alert('Formulário enviado com sucesso!')
-    }, 2000)
-    console.log(loading)
+    setLoading(true)
+
+    const emailParams = {
+      // eslint-disable-next-line camelcase
+      from_name: data.name,
+      company: data.company,
+      email: data.email,
+      cellphone: data.cellphone,
+      message: data.message
+    }
+
+    const serviceId: string = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId: string = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey: string = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    emailjs
+      .send(serviceId, templateId, emailParams, publicKey)
+      .then((res) => {
+        console.log(res)
+        toast.success('Formulário enviado com sucesso! 🤩', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored'
+        })
+
+        // Clean all inputs
+        Object.keys(data).forEach((key) => {
+          setValue(key as keyof Forms, '')
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error('Falha ao enviar o formulário, tente novamente! 😔', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored'
+        })
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   // Hook Form
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm<Forms>({
     resolver: zodResolver(formsSchema),
@@ -117,6 +162,7 @@ export default function Forms() {
           {loading ? <AiOutlineLoading className="animate-spin items-center text-2xl" /> : 'Enviar'}
         </Button>
       </form>
+      <ToastContainer />
     </main>
   )
 }
