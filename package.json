@@ -12,6 +12,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@hookform/resolvers": "^3.3.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/dom": "^9.3.1",
