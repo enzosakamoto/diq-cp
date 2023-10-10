@@ -1,4 +1,5 @@
 import { Company } from '../interfaces/company'
+import { nameCaptalized } from '../utils/nameCaptalized'
 
 export default function Square({ company }: { company: Company }) {
   return (
@@ -16,7 +17,7 @@ export default function Square({ company }: { company: Company }) {
         </div>
         <div className="absolute bottom-0 z-20 m-0 w-5/6 pb-4 ps-4 opacity-0 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-3 group-hover:scale-110 group-hover:opacity-100">
           <h1 className="rounded bg-white font-montserrat text-sm font-bold text-black">
-            {company.name}
+            {nameCaptalized(company.name)}
           </h1>
         </div>
       </div>

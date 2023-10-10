@@ -3,6 +3,7 @@ import { AiOutlineLoading } from 'react-icons/ai'
 
 import api from '../../api/server'
 import { Company } from '../../interfaces/company'
+import { nameCaptalized } from '../../utils/nameCaptalized'
 
 export default function Company() {
   const [company, setCompany] = useState<Company>({} as Company)
@@ -40,7 +41,7 @@ export default function Company() {
               <img className="object-contain" src={company.image} alt={`Logo da ${company.name}`} />
             </a>
             <div className="flex w-full flex-col gap-8 md:w-1/2">
-              <h1 className="text-2xl font-bold md:text-4xl">{company.name}</h1>
+              <h1 className="text-2xl font-bold md:text-4xl">{nameCaptalized(company.name)}</h1>
               <p className="text-base md:text-xl">{company.description}</p>
             </div>
           </section>
