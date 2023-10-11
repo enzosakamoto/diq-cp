@@ -25,9 +25,9 @@ export default function Company() {
 
   return (
     <>
-      <main className="flex w-full flex-col justify-center pt-12 font-montserrat md:h-screen md:pt-28">
+      <main className="flex w-full flex-col justify-center pt-20 font-montserrat sm:pt-12 md:h-screen md:pt-28">
         {loading ? (
-          <div className="flex w-full items-center justify-center">
+          <div className="flex h-screen w-full items-center justify-center sm:h-auto">
             <AiOutlineLoading className="col-span-4 animate-spin text-8xl text-sky-600" />
           </div>
         ) : (
