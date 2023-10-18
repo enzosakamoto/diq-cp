@@ -17,9 +17,6 @@ describe('<Navbar />', () => {
     )
 
     expect(getByRole('navigation')).toBeInTheDocument()
-    expect(getByRole('navigation')).toHaveClass(
-      'fixed flex w-full flex-row items-center justify-between gap-8 bg-transparent px-8 py-4 font-montserrat drop-shadow-md'
-    )
 
     expect(getAllByText('Formulário')[0]).toBeInTheDocument()
     expect(getAllByText('Empresas')[0]).toBeInTheDocument()

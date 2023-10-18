@@ -24,16 +24,16 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed z-40 flex w-full flex-row items-center justify-between gap-8 px-8 py-4 font-montserrat drop-shadow-md ${
+      className={`fixed z-40 flex w-full flex-row items-center justify-between gap-8 px-8 py-4 font-montserrat drop-shadow-sm ${
         url.includes('admin') || url.includes('companies') || url.includes('forms')
           ? 'bg-sky-800'
           : 'bg-transparent'
       }`}
     >
       <a className="transform transition-all duration-500 hover:scale-105" href="/">
-        <img src={logo} className="w-4/5 md:w-auto" alt="Logo IMT" />
+        <img src={logo} className="w-4/5 md:w-2/3" alt="Logo IMT" />
       </a>
-      <div className="hidden flex-row items-center justify-center gap-8 text-2xl text-white md:flex">
+      <div className="hidden flex-row items-center justify-center gap-8 text-xl text-white md:flex">
         <a className="transform transition-all duration-500 hover:scale-105" href="/forms">
           Formulário
         </a>
