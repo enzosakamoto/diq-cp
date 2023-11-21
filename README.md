@@ -1,6 +1,6 @@
 # Website for DIP-CP Partners
 
-Website with partners from the Innovation and Quality Division of the Mauá Institute of Technology Research Center.
+Website with partners from the Innovation and Quality Division of the Mauá Institute of Technology Research Center. [Deployment here.](https://diq-cp.vercel.app)
 
 ## Technologies
 
